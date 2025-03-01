@@ -42,46 +42,41 @@ impl Sql {
             command_path += ".exe";
         }
 
-        if metadata(&command_path).is_ok_and(|metadata| metadata.is_file()) {
+        if !metadata(&command_path).is_ok_and(|metadata| metadata.is_file()) {
+            let asset_name = format!(
+                "sqls-{}-{}.zip",
+                match current_platform().0 {
+                    Os::Mac => "darwin",
+                    Os::Linux => "linux",
+                    Os::Windows => "windows",
+                },
+                // Substring needed to remove the leading 'v'
+                &latest_release.version[1..],
+            );
+            let asset = latest_release
+                .assets
+                .into_iter()
+                .find(|asset| asset.name == asset_name)
+                .ok_or("no asset found for platform")?;
+
             set_language_server_installation_status(
                 language_server_id,
-                &LanguageServerInstallationStatus::None,
+                &LanguageServerInstallationStatus::Downloading,
             );
+            download_file(&asset.download_url, &version_path, DownloadedFileType::Zip)?;
+            make_file_executable(&command_path)?;
 
-            return Ok(command_path);
-        }
+            for entry in read_dir(ls_path).map_err(|err| err.to_string())? {
+                let entry = entry.map_err(|err| err.to_string())?;
+                let entry_path = entry.path();
 
-        let asset_name = format!(
-            "sqls-{}-{}.zip",
-            match current_platform().0 {
-                Os::Mac => "darwin",
-                Os::Linux => "linux",
-                Os::Windows => "windows",
-            },
-            // Substring needed to remove the leading 'v'
-            &latest_release.version[1..],
-        );
-        let asset = latest_release
-            .assets
-            .into_iter()
-            .find(|asset| asset.name == asset_name)
-            .ok_or("no asset found for platform")?;
-
-        set_language_server_installation_status(
-            language_server_id,
-            &LanguageServerInstallationStatus::Downloading,
-        );
-        download_file(&asset.download_url, &version_path, DownloadedFileType::Zip)?;
-        make_file_executable(&command_path)?;
-
-        for entry in read_dir(ls_path).map_err(|err| err.to_string())? {
-            let entry = entry.map_err(|err| err.to_string())?;
-            let entry_path = entry.path();
-
-            if entry_path != Path::new(&version_path) {
-                remove_dir_all(entry_path).map_err(|err| err.to_string())?;
+                if entry_path != Path::new(&version_path) {
+                    remove_dir_all(entry_path).map_err(|err| err.to_string())?;
+                }
             }
         }
+
+        self.command_path = Some(command_path.clone());
 
         set_language_server_installation_status(
             language_server_id,
