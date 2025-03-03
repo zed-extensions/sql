@@ -4,7 +4,7 @@ schema_version = 1
 version = "1.1.2"
 authors = ["nervenes", "notpeter", "phileix", "tammyxiong"]
 description = "SQL language support."
-repository = "https://github.com/nervenes/zed-sql"
+repository = "https://github.com/zed-extensions/sql"
 
 [grammars.sql]
 repository = "https://github.com/nervenes/tree-sitter-sql"
