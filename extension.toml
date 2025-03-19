@@ -7,5 +7,5 @@ description = "SQL language support."
 repository = "https://github.com/zed-extensions/sql"
 
 [grammars.sql]
-repository = "https://github.com/nervenes/tree-sitter-sql"
-commit = "6dfca8b6dcb196d943c10e9cabab25e60232d332"
+repository = "https://github.com/DerekStride/tree-sitter-sql"
+commit = "4a99c73f5384f2be10adc55208c84d95a7eb1137"
