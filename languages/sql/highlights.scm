@@ -30,8 +30,10 @@
     parameter: [(literal)]?)))
 
 (literal) @string
-(comment) @comment @spell
-(marginalia) @comment
+[
+  (comment)
+  (marginalia)
+] @comment
 
 ((literal) @number
    (#match? @number "^[-+]?%d+$"))
