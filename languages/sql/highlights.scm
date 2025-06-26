@@ -31,6 +31,7 @@
 
 (literal) @string
 (comment) @comment
+(comment) @spell
 (marginalia) @comment
 
 ((literal) @number
