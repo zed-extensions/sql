@@ -30,7 +30,7 @@
     parameter: [(literal)]?)))
 
 (literal) @string
-(comment) @comment @spell
+(comment) @comment
 (marginalia) @comment
 
 ((literal) @number
