@@ -1,5 +1,8 @@
-(object_reference
-  name: (identifier) @type)
+(identifier) @variable
+
+(object_reference (identifier) @type)
+(cte (identifier) @type)
+(relation (identifier) @type)
 
 (invocation
   (object_reference
@@ -15,10 +18,13 @@
   (keyword_array)
 ] @function.call
 
-(relation
-  alias: (identifier) @variable)
-
 (field
+  name: (identifier) @field)
+
+(column_definition
+  name: (identifier) @field)
+
+(column
   name: (identifier) @field)
 
 (term
@@ -45,6 +51,8 @@
  (keyword_true)
  (keyword_false)
 ] @boolean
+
+(keyword_null) @constant.builtin
 
 [
  (keyword_asc)
@@ -74,7 +82,7 @@
  (keyword_safe)
  (keyword_cost)
  (keyword_strict)
-] @attribute
+] @keyword
 
 [
  (keyword_materialized)
@@ -92,14 +100,14 @@
  (keyword_jsonfile)
  (keyword_sequencefile)
  (keyword_volatile)
-] @storageclass
+] @keyword
 
 [
  (keyword_case)
  (keyword_when)
  (keyword_then)
  (keyword_else)
-] @conditional
+] @keyword
 
 [
   (keyword_select)
@@ -345,11 +353,10 @@
  (keyword_statistics)
  (keyword_maxvalue)
  (keyword_minvalue)
-] @type.qualifier
+] @keyword
 
 [
   (keyword_int)
-  (keyword_null)
   (keyword_boolean)
   (keyword_binary)
   (keyword_varbinary)
