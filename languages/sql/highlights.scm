@@ -1,7 +1,7 @@
 (identifier) @variable
 
 (object_reference (identifier) @type)
-(cte (identifier) @type)
+(cte (identifier) @variable)
 (relation (identifier) @type)
 
 (invocation
