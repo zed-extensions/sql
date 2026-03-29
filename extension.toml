@@ -2,10 +2,14 @@ id = "sql"
 name = "SQL"
 schema_version = 1
 version = "1.1.7"
-authors = ["nervenes", "notpeter", "phileix", "tammyxiong"]
+authors = ["nervenes", "notpeter", "phileix", "tammyxiong", "valentinegb"]
 description = "SQL language support."
 repository = "https://github.com/zed-extensions/sql"
 
 [grammars.sql]
 repository = "https://github.com/DerekStride/tree-sitter-sql"
 commit = "4a99c73f5384f2be10adc55208c84d95a7eb1137"
+
+[language_servers.sqls]
+name = "sqls"
+languages = ["SQL"]
