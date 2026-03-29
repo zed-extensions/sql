@@ -6,7 +6,7 @@ use std::{
 use zed_extension_api::{
     self as zed, DownloadedFileType, Extension, GithubReleaseOptions, LanguageServerId,
     LanguageServerInstallationStatus, Os, Worktree, current_platform, download_file,
-    latest_github_release, make_file_executable, register_extension, serde_json::Value,
+    latest_github_release, make_file_executable, register_extension, serde_json::{self, Value},
     set_language_server_installation_status, settings::LspSettings,
 };
 
@@ -113,7 +113,7 @@ impl Extension for Sql {
         worktree: &Worktree,
     ) -> zed_extension_api::Result<Option<Value>> {
         LspSettings::for_worktree(language_server_id.as_ref(), worktree)
-            .map(|settings| settings.settings)
+            .map(|settings| settings.settings.map(|s| serde_json::json!({ "sqls": s })))
     }
 }
 
