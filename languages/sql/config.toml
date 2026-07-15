@@ -4,5 +4,7 @@ path_suffixes = ["sql"]
 line_comments = ["-- "]
 brackets = [
     { start = "(", end = ")", close = true, newline = false },
+    { start = "'", end = "'", close = true, newline = false },
+    { start = "\"", end = "\"", close = true, newline = false },
     { start = "BEGIN", end = "END", close = true, newline = true },
 ]
