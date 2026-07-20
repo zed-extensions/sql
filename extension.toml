@@ -8,4 +8,4 @@ repository = "https://github.com/zed-extensions/sql"
 
 [grammars.sql]
 repository = "https://github.com/DerekStride/tree-sitter-sql"
-commit = "c2e1e08db1ea20dc23bdb8d228a81a8756e9c450"
+commit = "851e9cb257ba7c66cc8c14214a31c44d2f1e954e"
