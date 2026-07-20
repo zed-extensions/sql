@@ -24,13 +24,13 @@
 ] @function.call
 
 (field
-  name: (identifier) @field)
+  name: (identifier) @property)
 
 (column_definition
-  name: (identifier) @field)
+  name: (identifier) @property)
 
 (column
-  name: (identifier) @field)
+  name: (identifier) @property)
 
 (term
   alias: (identifier) @variable)
@@ -47,10 +47,10 @@
 (marginalia) @comment
 
 ((literal) @number
-  (#match? @number "^[-+]?%d+$"))
+  (#match? @number "^[-+]?\\d+$"))
 
-((literal) @float
-  (#match? @float "^[-+]?%d*\.%d*$"))
+((literal) @number
+  (#match? @number "^[-+]?\\d*\\.\\d*$"))
 
 (parameter) @parameter
 
