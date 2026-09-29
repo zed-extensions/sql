@@ -1,5 +1,11 @@
 (identifier) @variable
 
+; The grammar doesn't reserve PRAGMA as a keyword token, so it lexes as a
+; plain identifier; match on its text so SQLite's PRAGMA statements still
+; highlight as a keyword.
+((identifier) @keyword
+  (#match? @keyword "(?i)^pragma$"))
+
 (object_reference
   (identifier) @type)
 
